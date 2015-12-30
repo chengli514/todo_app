@@ -10,6 +10,11 @@
     <tr>
       <td><%= todo.title %></td>
       <td><%= todo.text %></td>
+      <td><%= link_to 'Show', todo_path(todo) %></td>
+      <td><%= link_to 'Edit', edit_todo_path(todo) %></td>      
+      <td><%= link_to 'Destroy', todo_path(todo), method: :delete, data: { confirm: 'Are you sure?' } %></td>
     </tr>
   <% end %>
+
 </table>
+<%= link_to 'New Todo', new_todo_path %>

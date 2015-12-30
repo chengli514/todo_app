@@ -1,5 +1,5 @@
-<h1>New Todo</h1>
-<%= form_for :todo, url: todo_index_path do |f| %>
+<h1>Edit Todo</h1>
+<%= form_for :todo, url: todo_path(@todo), method: :patch do |f| %>
   <% if @todo.errors.any? %>
     <div id="error_explanation">
       <h2>
