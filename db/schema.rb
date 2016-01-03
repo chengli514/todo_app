@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151207070436) do
+ActiveRecord::Schema.define(version: 20160101073852) do
 
   create_table "todos", force: :cascade do |t|
     t.string   "title",      limit: 255
     t.text     "text",       limit: 65535
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "parent_id",  limit: 4
   end
 
 end

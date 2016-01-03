@@ -7,4 +7,11 @@
   <strong>Text:</strong>
   <%= @todo.text %>
 </p>
+
+<p>
+<%= link_to 'Add Sub Todo', todo_new_child_path %>
+</p>
+
+<p>
 <%= link_to 'Back', todo_index_path %>
+</p>

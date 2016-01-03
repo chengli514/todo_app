@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :todo
-  
+ 
+  get 'todo/:id/new' => 'todo#new_child', as: :todo_new_child
+  post 'todo/:id/create' => 'todo#create_child', as: :todo_create_child
+
   root 'homepage#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

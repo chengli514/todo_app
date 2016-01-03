@@ -40,6 +40,28 @@ class TodoController < ApplicationController
     redirect_to todo_index_path
   end
 
+  def new_child 
+    @todo = Todo.new
+    @parent_todo_id = params[:id]
+  end
+
+  def create_child
+    @debug = {}
+    title = params[:todo][:title]
+    text = params[:todo][:text]
+    parent_id = params[:id]
+    @debug[:title] = title
+    @debug[:text] = text
+    @debug[:parent_id] = parent_id
+    #@todo = Todo.new(params.require(:todo).permit(:title, :text))
+    #if @todo.save
+    #  redirect_to @todo
+    #else
+      #TODO
+    #  assert(false)
+    #end
+  end
+
   private
   def todo_params
     params.require(:todo).permit(:title, :text)
