@@ -46,20 +46,14 @@ class TodoController < ApplicationController
   end
 
   def create_child
-    @debug = {}
-    title = params[:todo][:title]
-    text = params[:todo][:text]
-    parent_id = params[:id]
-    @debug[:title] = title
-    @debug[:text] = text
-    @debug[:parent_id] = parent_id
-    #@todo = Todo.new(params.require(:todo).permit(:title, :text))
-    #if @todo.save
-    #  redirect_to @todo
-    #else
-      #TODO
-    #  assert(false)
-    #end
+    @todo = Todo.new(params.require(:todo).permit(:title, :text))
+    @todo.parent = Todo.find(params[:id])
+    @debug = @todo
+    if @todo.save
+      redirect_to @todo
+    else
+      render 'new_child'
+    end
   end
 
   private

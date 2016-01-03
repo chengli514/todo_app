@@ -8,9 +8,25 @@
   <%= @todo.text %>
 </p>
 
+<h1> Sub Todos </h1>
+
+<% @todo.children.each do |child_todo| %>
+  <p>
+    <%= child_todo.title %>
+    <%= child_todo.id %>
+    <%= link_to 'link', todo_path(child_todo.id) %>
+  </p>
+<%end %>
+
 <p>
 <%= link_to 'Add Sub Todo', todo_new_child_path %>
 </p>
+
+<% if @todo.parent %>
+  <p>
+  <%= link_to 'Parent Todo', todo_path(@todo.parent.id) %>
+  </p>
+<% end %>
 
 <p>
 <%= link_to 'Back', todo_index_path %>
