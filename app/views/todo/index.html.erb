@@ -3,13 +3,11 @@
 <table>
   <tr>
     <th>Title</th>
-    <th>Text</th>
   </tr>
  
   <% @todos.each do |todo| %>
     <tr>
       <td><%= todo.title %></td>
-      <td><%= todo.text %></td>
       <td><%= link_to 'Show', todo_path(todo) %></td>
       <td><%= link_to 'Edit', edit_todo_path(todo) %></td>      
       <td><%= link_to 'Destroy', todo_path(todo), method: :delete, data: { confirm: 'Are you sure?' } %></td>

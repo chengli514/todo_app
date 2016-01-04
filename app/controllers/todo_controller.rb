@@ -16,7 +16,7 @@ class TodoController < ApplicationController
   end
 
   def create
-    @todo = Todo.new(params.require(:todo).permit(:title, :text))
+    @todo = Todo.new(params.require(:todo).permit(:title))
     if @todo.save
       redirect_to @todo
     else
@@ -46,7 +46,7 @@ class TodoController < ApplicationController
   end
 
   def create_child
-    @todo = Todo.new(params.require(:todo).permit(:title, :text))
+    @todo = Todo.new(params.require(:todo).permit(:title))
     @todo.parent = Todo.find(params[:id])
     @debug = @todo
     if @todo.save
@@ -58,6 +58,6 @@ class TodoController < ApplicationController
 
   private
   def todo_params
-    params.require(:todo).permit(:title, :text)
+    params.require(:todo).permit(:title)
   end
 end

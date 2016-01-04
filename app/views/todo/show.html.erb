@@ -3,11 +3,6 @@
   <%= @todo.title %>
 </p>
  
-<p>
-  <strong>Text:</strong>
-  <%= @todo.text %>
-</p>
-
 <h1> Sub Todos </h1>
 
 <% @todo.children.each do |child_todo| %>
