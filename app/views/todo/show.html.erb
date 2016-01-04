@@ -1,8 +1,7 @@
-<div class=container>
-  <h1><%= @todo.title %></h1>
-   
-  <h2> Sub Todos </h2>
-
+<div class="container">
+  <div class="page-header">
+    <h1><%= @todo.title %></h1>
+  </div>
   <h3> Done </h3>
   <% @todo.children.each do |child_todo| %>
     <% if child_todo.is_done %>
@@ -32,11 +31,7 @@
 
   <% if @todo.parent %>
     <p>
-    <%= link_to 'Parent Todo', todo_path(@todo.parent.id) %>
+    <%= link_to 'Parent Todo', todo_path(@todo.parent.id), class: "btn btn-warning" %>
     </p>
   <% end %>
-
-  <p>
-  <%= link_to 'Top Level Todo', todo_index_path %>
-  </p>
 </div>
