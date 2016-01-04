@@ -1,6 +1,7 @@
 class TodoController < ApplicationController
   def index
     @todos = Todo.all
+    @todo = Todo.new
   end
   
   def show
@@ -17,8 +18,9 @@ class TodoController < ApplicationController
 
   def create
     @todo = Todo.new(params.require(:todo).permit(:title))
+    @todo.is_top_level = true
     if @todo.save
-      redirect_to @todo
+      redirect_to todo_index_path
     else
       render 'new'
     end
@@ -65,14 +67,22 @@ class TodoController < ApplicationController
     @todo = Todo.find(params[:id])
     @todo.is_done = true
     @todo.save
-    redirect_to @todo.parent
+    if @todo.parent
+      redirect_to @todo.parent
+    else
+      redirect_to root_path
+    end
   end
 
   def set_as_not_done
     @todo = Todo.find(params[:id])
     @todo.is_done = false
     @todo.save
-    redirect_to @todo.parent
+    if @todo.parent
+      redirect_to @todo.parent
+    else
+      redirect_to root_path
+    end
   end
 
   private

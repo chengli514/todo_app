@@ -14,7 +14,7 @@
           <div class="todo-box">
             <span class="glyphicon glyphicon-star">
               <%= link_to child_todo.title, todo_path(child_todo.id) %>
-              <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target=<%="#todoList" + child_todo.id.to_s%> aria-expanded="true" aria-controls=<%="todoList" + child_todo.id.to_s%>>
+              <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target=<%="#todoList" + child_todo.id.to_s%> aria-expanded="false" aria-controls=<%="todoList" + child_todo.id.to_s%>>
                 [+/-]
               </button>
             </span>
@@ -22,7 +22,7 @@
               <%= link_to 'Not Done', todo_set_not_done_path(child_todo.id), :method => :patch, class: "btn btn-warning" %>
               <%= link_to 'X', todo_path(child_todo.id), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn" %>
             </div>
-            <%= render :partial => 'show_todo_partial', :locals => {:todo_instance => child_todo} %>
+            <%= render :partial => 'show_todo_partial', :locals => {:todo_instance => child_todo, :default_open => false} %>
           </div>
           <div class="line-separator"> </div>
         <%end %>
@@ -50,7 +50,7 @@
                   <%= link_to 'Done', todo_set_done_path(child_todo.id), :method => :patch, class: "btn btn-success"  %> 
                   <%= link_to 'X', todo_path(child_todo.id), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn" %>
                 </div>
-                <%= render :partial => 'show_todo_partial', :locals => {:todo_instance => child_todo} %>
+                <%= render :partial => 'show_todo_partial', :locals => {:todo_instance => child_todo, :default_open => true} %>
             </div>
             <div class="line-separator"> </div>
           <%end %>

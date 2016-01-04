@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   patch 'todo/:id/done' => 'todo#set_as_done', as: :todo_set_done
   patch 'todo/:id/notdone' => 'todo#set_as_not_done', as: :todo_set_not_done
 
-  root 'homepage#index'
+  root 'todo#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
