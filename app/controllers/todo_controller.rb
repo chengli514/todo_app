@@ -35,9 +35,14 @@ class TodoController < ApplicationController
 
   def destroy
     @todo = Todo.find(params[:id])
+    parent_todo = @todo.parent
     @todo.destroy
-   
-    redirect_to todo_index_path
+  
+    if parent_todo
+      redirect_to parent_todo
+    else
+      redirect_to todo_index_path
+    end
   end
 
   def new_child 
@@ -50,7 +55,7 @@ class TodoController < ApplicationController
     @todo.parent = Todo.find(params[:id])
     @debug = @todo
     if @todo.save
-      redirect_to @todo
+      redirect_to @todo.parent
     else
       render 'new_child'
     end
