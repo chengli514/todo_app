@@ -7,16 +7,22 @@
     <button class="btn btn-lg" type="button" data-toggle="collapse" data-target="#doneTodoList" aria-expanded="true" aria-controls="doneTodoList">
       Done [+/-]
     </button>
-    <div class="collapse in" id="doneTodoList">
+
+    <div class="collapse in todo-list" id="doneTodoList">
       <% @todo.children.each do |child_todo| %>
         <% if child_todo.is_done %>
           <div class="todo-box">
-            <span class="glyphicon glyphicon-star"></span>
-            <%= link_to child_todo.title, todo_path(child_todo.id) %>
+            <span class="glyphicon glyphicon-star">
+              <%= link_to child_todo.title, todo_path(child_todo.id) %>
+              <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target=<%="#todoList" + child_todo.id.to_s%> aria-expanded="true" aria-controls=<%="todoList" + child_todo.id.to_s%>>
+                [+/-]
+              </button>
+            </span>
             <div class="pull-right">
               <%= link_to 'Not Done', todo_set_not_done_path(child_todo.id), :method => :patch, class: "btn btn-warning" %>
               <%= link_to 'X', todo_path(child_todo.id), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn" %>
             </div>
+            <%= render :partial => 'show_todo_partial', :locals => {:todo_instance => child_todo} %>
           </div>
           <div class="line-separator"> </div>
         <%end %>
@@ -29,26 +35,32 @@
       Todo [+/-]
     </button>
 
-    <div class="collapse in" id="todoList">
+    <div class="collapse in todo-list" id="todoList">
       <div>
         <% @todo.children.each do |child_todo| %>
           <% if !child_todo.is_done %>
             <div class="todo-box">
-                <span class="glyphicon glyphicon-star"></span>
-                <%= link_to child_todo.title, todo_path(child_todo.id) %> 
+                <span class="glyphicon glyphicon-star">
+                  <%= link_to child_todo.title, todo_path(child_todo.id) %> 
+                  <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target=<%="#todoList" + child_todo.id.to_s%> aria-expanded="true" aria-controls=<%="todoList" + child_todo.id.to_s%>>
+                    [+/-]
+                  </button>
+                </span>
                 <div class="pull-right">
                   <%= link_to 'Done', todo_set_done_path(child_todo.id), :method => :patch, class: "btn btn-success"  %> 
                   <%= link_to 'X', todo_path(child_todo.id), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn" %>
                 </div>
+                <%= render :partial => 'show_todo_partial', :locals => {:todo_instance => child_todo} %>
             </div>
             <div class="line-separator"> </div>
           <%end %>
         <%end %>
       </div>
-
-      <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#subTodoForm" aria-expanded="false" aria-controls="subTodoForm">
-        Add Sub Todo
-      </button>
+      <div class="btn-vert-pad">
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#subTodoForm" aria-expanded="false" aria-controls="subTodoForm">
+          Add Sub Todo
+        </button>
+      </div>
       <div class="collapse" id="subTodoForm">
         <div class="well">
           <%= form_for :todo, url: todo_create_child_url do |f| %>

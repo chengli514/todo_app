@@ -1,0 +1,19 @@
+<div>
+  <div class="collapse in" id=<%="todoList" + todo_instance.id.to_s%>>
+    <div>
+      <% todo_instance.children.each do |child_todo| %>
+        <% if !child_todo.is_done %>
+          <div class="todo-box indent-left">
+            <span class="glyphicon glyphicon-star">
+              <%= link_to child_todo.title, todo_path(child_todo.id) %>
+              <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target=<%="#todoList" + child_todo.id.to_s%> aria-expanded="true" aria-controls=<%="todoList" + child_todo.id.to_s%>>
+                [+/-]
+              </button>
+            </span>
+            <%= render :partial => 'show_todo_partial', :locals => {:todo_instance => child_todo} %>
+          </div>
+        <%end %>
+      <%end %>
+    </div>
+  </div>
+</div>

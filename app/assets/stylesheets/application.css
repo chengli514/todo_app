@@ -33,3 +33,16 @@
   margin-bottom: 10px;
   border-bottom: 1px solid grey;
 }
+
+.indent-left {
+  margin-left: 20px;
+}
+
+.todo-list {
+  margin-bottom: 20px;
+}
+
+.btn-vert-pad {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
