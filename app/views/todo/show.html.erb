@@ -8,7 +8,6 @@
     <p>
       <%= link_to child_todo.title, todo_path(child_todo.id) %>
       <%= child_todo.is_done %>
-      <%= link_to 'set as done', todo_set_done_path(child_todo.id), :method => :patch %>
       <%= link_to 'set as not done', todo_set_not_done_path(child_todo.id), :method => :patch %>
     </p>
   <%end %>
@@ -21,7 +20,6 @@
       <%= link_to child_todo.title, todo_path(child_todo.id) %>
       <%= child_todo.is_done %>
       <%= link_to 'set as done', todo_set_done_path(child_todo.id), :method => :patch %>
-      <%= link_to 'set as not done', todo_set_not_done_path(child_todo.id), :method => :patch %>
     </p>
   <%end %>
 <%end %>
