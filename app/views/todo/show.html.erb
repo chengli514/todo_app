@@ -1,39 +1,42 @@
-<h1><%= @todo.title %></h1>
- 
-<h2> Sub Todos </h2>
+<div class=container>
+  <h1><%= @todo.title %></h1>
+   
+  <h2> Sub Todos </h2>
 
-<h3> Done </h3>
-<% @todo.children.each do |child_todo| %>
-  <% if child_todo.is_done %>
-    <p>
-      <%= link_to child_todo.title, todo_path(child_todo.id) %>
-      <%= child_todo.is_done %>
-      <%= link_to 'set as not done', todo_set_not_done_path(child_todo.id), :method => :patch %>
-    </p>
+  <h3> Done </h3>
+  <% @todo.children.each do |child_todo| %>
+    <% if child_todo.is_done %>
+      <div class="todo-box">
+        <span class="glyphicon glyphicon-star"></span>
+        <%= link_to child_todo.title, todo_path(child_todo.id) %>
+        <%= link_to 'Not Done', todo_set_not_done_path(child_todo.id), :method => :patch, class: "btn btn-danger pull-right" %>
+      </div>
+      <div class="line-separator"> </div>
+    <%end %>
   <%end %>
-<%end %>
 
-<h3> Todo </h3>
-<% @todo.children.each do |child_todo| %>
-  <% if !child_todo.is_done %>
-    <p>
-      <%= link_to child_todo.title, todo_path(child_todo.id) %>
-      <%= child_todo.is_done %>
-      <%= link_to 'set as done', todo_set_done_path(child_todo.id), :method => :patch %>
-    </p>
+  <h3> Todo </h3>
+  <% @todo.children.each do |child_todo| %>
+    <% if !child_todo.is_done %>
+      <div class="todo-box">
+          <span class="glyphicon glyphicon-star"></span>
+          <%= link_to child_todo.title, todo_path(child_todo.id) %> 
+          <%= link_to 'Done', todo_set_done_path(child_todo.id), :method => :patch, class: "btn btn-success pull-right"  %> </div>
+      <div class="line-separator"> </div>
+    <%end %>
   <%end %>
-<%end %>
 
-<p>
-<%= link_to 'Add Sub Todo', todo_new_child_path %>
-</p>
-
-<% if @todo.parent %>
   <p>
-  <%= link_to 'Parent Todo', todo_path(@todo.parent.id) %>
+  <%= link_to 'Add Sub Todo', todo_new_child_path, class: "btn btn-primary" %>
   </p>
-<% end %>
 
-<p>
-<%= link_to 'Top Level Todo', todo_index_path %>
-</p>
+  <% if @todo.parent %>
+    <p>
+    <%= link_to 'Parent Todo', todo_path(@todo.parent.id) %>
+    </p>
+  <% end %>
+
+  <p>
+  <%= link_to 'Top Level Todo', todo_index_path %>
+  </p>
+</div>
