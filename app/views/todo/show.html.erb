@@ -2,10 +2,28 @@
  
 <h2> Sub Todos </h2>
 
+<h3> Done </h3>
 <% @todo.children.each do |child_todo| %>
-  <p>
-    <%= link_to child_todo.title, todo_path(child_todo.id) %>
-  </p>
+  <% if child_todo.is_done %>
+    <p>
+      <%= link_to child_todo.title, todo_path(child_todo.id) %>
+      <%= child_todo.is_done %>
+      <%= link_to 'set as done', todo_set_done_path(child_todo.id), :method => :patch %>
+      <%= link_to 'set as not done', todo_set_not_done_path(child_todo.id), :method => :patch %>
+    </p>
+  <%end %>
+<%end %>
+
+<h3> Todo </h3>
+<% @todo.children.each do |child_todo| %>
+  <% if !child_todo.is_done %>
+    <p>
+      <%= link_to child_todo.title, todo_path(child_todo.id) %>
+      <%= child_todo.is_done %>
+      <%= link_to 'set as done', todo_set_done_path(child_todo.id), :method => :patch %>
+      <%= link_to 'set as not done', todo_set_not_done_path(child_todo.id), :method => :patch %>
+    </p>
+  <%end %>
 <%end %>
 
 <p>

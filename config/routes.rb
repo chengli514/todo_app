@@ -4,6 +4,9 @@ Rails.application.routes.draw do
   get 'todo/:id/new' => 'todo#new_child', as: :todo_new_child
   post 'todo/:id/create' => 'todo#create_child', as: :todo_create_child
 
+  patch 'todo/:id/done' => 'todo#set_as_done', as: :todo_set_done
+  patch 'todo/:id/notdone' => 'todo#set_as_not_done', as: :todo_set_not_done
+
   root 'homepage#index'
 
   # The priority is based upon order of creation: first created -> highest priority.

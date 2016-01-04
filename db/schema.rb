@@ -15,10 +15,10 @@ ActiveRecord::Schema.define(version: 20160104025549) do
 
   create_table "todos", force: :cascade do |t|
     t.string   "title",      limit: 255
-    t.datetime "created_at",             null: false
-    t.datetime "updated_at",             null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
     t.integer  "parent_id",  limit: 4
-    t.boolean  "is_done"
+    t.boolean  "is_done",                default: false
   end
 
 end

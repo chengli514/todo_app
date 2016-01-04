@@ -56,6 +56,20 @@ class TodoController < ApplicationController
     end
   end
 
+  def set_as_done
+    @todo = Todo.find(params[:id])
+    @todo.is_done = true
+    @todo.save
+    redirect_to @todo.parent
+  end
+
+  def set_as_not_done
+    @todo = Todo.find(params[:id])
+    @todo.is_done = false
+    @todo.save
+    redirect_to @todo.parent
+  end
+
   private
   def todo_params
     params.require(:todo).permit(:title)
